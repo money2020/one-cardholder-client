@@ -2,23 +2,23 @@
 
 ## Environment Variables
 
-- `API_URL`: Url of the backend to hit (defaults to `https://one-money2020.herokuapp.com`)
-- `USER`: The user to pass to the backend (defaults to `Cathy`)
+| Variable  | Description                      | Default
+|-----------|----------------------------------|---------------------------------------|
+| `API_URL` | Url of the backend to hit        | `https://one-money2020.herokuapp.com` |
+| `USER`    | The user to pass to the backend  | `Cathy` |
+| `HOST`    | Serve on this host (docker only) | `127.0.0.1` |
+| `PORT`    | Serve on this port (docker only) | `8080` |
 
 
 ## Docker Instructions 🐳
 
-https://www.docker.com/community-edition#/download
+First, install Docker: https://www.docker.com/community-edition#/download
 
+Then run:
 
-### Additional Environment Variables
-
-- `HOST`: Serve the frontend from this host (defaults to `127.0.0.1`)
-- `PORT`: Serve the frontend from this port (defaults to `8080`)
-
-### Running
-
-Simply do `make` or `make run`.
+```
+make
+```
 
 To run on a different port:
 ```
