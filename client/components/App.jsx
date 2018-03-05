@@ -14,12 +14,32 @@ import FlipMove from 'react-flip-move';
 import moment from 'moment';
 
 
+const CONFIG = {
+  API_URL: process.env.API_URL
+, USER:    process.env.USER
+}
 
-const getJSON = (url) => {
-  return fetch(url, {
-    method: 'get',
-    headers: new Headers({ 'Content-Type': 'application/json' })
-  }).then((response) => { return response.json() })
+console.log("Config:", CONFIG)
+
+
+class OneAPI {
+  constructor(baseUrl, user) {
+    this.baseUrl = baseUrl;
+    this.user    = user;
+  }
+  getRewards() {
+    return this.get(`/api/one/rewards?user=${this.user}`);
+  }
+  getOffers() {
+    return this.get('/api/one/offers');
+  }
+  get(endpoint) {
+    const url = `${this.baseUrl}${endpoint}`;
+    return fetch(url, {
+      method: 'get',
+      headers: new Headers({ 'Content-Type': 'application/json' })
+    }).then((response) => { return response.json() });
+  }
 }
 
 
@@ -38,7 +58,7 @@ class ProfileModel {
     if (cardName == 'Capital One Mastercardworldcard Points *4734') {
       cardName = 'Capital One - MasterCard World Card'
     }
-    this.cardName = cardName
+    this.cardName = `${firstName} ${lastName}`
   }
 }
 
@@ -48,10 +68,14 @@ class ProfileStore {
   @observable profile = {}
   @observable loading = false
 
+  constructor(api) {
+    this.api = api;
+  }
+
   loadFromServer() {
     const store = this
     store.loading = true
-    return getJSON('https://one-money2020.herokuapp.com/api/one/rewards?user=nick').then((data) => {
+    return this.api.getRewards().then((data) => {
       const balance   = data.rewardsBalance
       const firstName = data.primaryAccountHolder.firstName
       const lastName  = data.primaryAccountHolder.lastName
@@ -112,7 +136,8 @@ class OfferStore {
 
   @observable sortField = "id"
 
-  constructor() {
+  constructor(api) {
+    this.api = api;
     setInterval(() => {
       console.log('LOADING!')
       if (this.loading) return
@@ -174,7 +199,7 @@ class OfferStore {
   loadFromServer() {
     const store = this
     this.loading = true
-    getJSON('https://one-money2020.herokuapp.com/api/one/offers').then((data) => {
+    this.api.getOffers().then((data) => {
       console.log("JSON data:", data)
       if (this.hasSelected()) {
         this.loading = false
@@ -458,8 +483,9 @@ class OfferListItem extends React.Component {
 }
 
 const App = observer(() => {
-  const offerStore   = new OfferStore()
-  const profileStore = new ProfileStore()
+  const api          = new OneAPI(CONFIG.API_URL, CONFIG.USER);
+  const offerStore   = new OfferStore(api);
+  const profileStore = new ProfileStore(api)
   offerStore.loadFromServer()
   profileStore.loadFromServer()
   return (
