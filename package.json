@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "DOMAIN= NODE_ENV=production webpack --config ./webpack.config.js",
+    "start":  "node_modules/.bin/webpack-dev-server --host 0.0.0.0",
+    "build":  "NODE_ENV=production webpack --config ./webpack.config.js",
     "deploy": "npm run build && gh-pages -d build"
   },
   "author": "",
