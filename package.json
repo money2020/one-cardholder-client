@@ -36,6 +36,7 @@
     "react-addons-css-transition-group": "^15.6.2",
     "react-addons-transition-group": "^15.6.2",
     "react-codemirror": "^1.0.0",
+    "react-countup": "^2.3.0",
     "react-d3-library": "^1.1.8",
     "react-dock": "^0.2.4",
     "react-dom": "^16.0.0",
