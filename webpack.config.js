@@ -11,37 +11,27 @@ const CreateFilePlugin    = require('webpack-create-file-plugin')
 const GenerateAssetPlugin = require('generate-asset-webpack-plugin')
 
 
+let plugins = [
+  new HtmlWebpackPlugin({
+    template: './client/index.html',
+    filename: 'index.html',
+    inject: 'body'
+  })
+, new webpack.DefinePlugin({
+    'process.env':{
+      'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+    , 'API_URL':  JSON.stringify(process.env.API_URL  || 'https://one-money2020.herokuapp.com')
+    , 'API_USER': JSON.stringify(process.env.API_USER || 'Cathy')
+    }
+  })
+]
+
+
 if (process.env.NODE_ENV === "production") {
-  plugins = _.compact([
-  //, new webpack.optimize.ModuleConcatenationPlugin()
-  //, new MinifyPlugin()
-    new CreateFilePlugin({files:['.nojekyll']})
-  , (!process.env.DOMAIN)? null : new GenerateAssetPlugin({
-      filename: "CNAME"
-    , fn: ((x, cb) => cb(null, process.env.DOMAIN))
-    })
-  ])
+  // plugins.push(new GenerateAssetPlugin({filename: "CNAME", fn: ((x, cb) => cb(null, process.env.DOMAIN))}))
 } else {
-  plugins = [
-    new HtmlWebpackPlugin({
-      template: './client/index.html',
-      filename: 'index.html',
-      inject: 'body'
-    })
-  , new LiveReloadPlugin({
-      appendScriptTag: true
-    })
-  ]
+  plugins.push(new LiveReloadPlugin({appendScriptTag: true}))
 }
-
-
-plugins.unshift(new webpack.DefinePlugin({
-  'process.env':{
-    'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-  , 'API_URL':  JSON.stringify(process.env.API_URL  || 'https://one-money2020.herokuapp.com')
-  , 'USER':     JSON.stringify(process.env.USER     || 'Cathy')
-  }
-}))
 
 
 module.exports = {

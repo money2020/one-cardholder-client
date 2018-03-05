@@ -2,12 +2,12 @@
 
 ## Environment Variables
 
-| Variable  | Description                      | Default
-|-----------|----------------------------------|---------------------------------------|
-| `API_URL` | Url of the backend to hit        | `https://one-money2020.herokuapp.com` |
-| `USER`    | The user to pass to the backend  | `Cathy` |
-| `HOST`    | Serve on this host (docker only) | `127.0.0.1` |
-| `PORT`    | Serve on this port (docker only) | `8080` |
+| Variable   | Description                      | Default
+|------------|----------------------------------|---------------------------------------|
+| `API_URL`  | Url of the backend to hit        | `https://one-money2020.herokuapp.com` |
+| `API_USER` | The user to pass to the backend  | `Cathy`                               |
+| `HOST`     | Serve on this host (docker only) | `127.0.0.1`                           |
+| `PORT`     | Serve on this port (docker only) | `8080`                                |
 
 
 ## Docker Instructions 🐳

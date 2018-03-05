@@ -15,8 +15,8 @@ import moment from 'moment';
 
 
 const CONFIG = {
-  API_URL: process.env.API_URL
-, USER:    process.env.USER
+  API_URL:  process.env.API_URL
+, API_USER: process.env.API_USER
 }
 
 console.log("Config:", CONFIG)
@@ -483,7 +483,7 @@ class OfferListItem extends React.Component {
 }
 
 const App = observer(() => {
-  const api          = new OneAPI(CONFIG.API_URL, CONFIG.USER);
+  const api          = new OneAPI(CONFIG.API_URL, CONFIG.API_USER);
   const offerStore   = new OfferStore(api);
   const profileStore = new ProfileStore(api)
   offerStore.loadFromServer()
