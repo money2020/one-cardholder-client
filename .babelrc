@@ -1,0 +1,10 @@
+{
+    "presets":[
+        "react"
+    ],
+    "plugins": [
+      ["lodash", { "id": ["lodash", "semantic-ui-react"] }]
+    , "transform-decorators-legacy"
+    , "babel-plugin-transform-class-properties"
+    ]
+}
