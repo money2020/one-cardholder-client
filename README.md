@@ -33,6 +33,13 @@ API_URL=https://example.com make
 And so on...
 
 
+If you want to build, run:
+
+```
+make build
+```
+
+
 ## NodeJS Instructions
 
 ```
