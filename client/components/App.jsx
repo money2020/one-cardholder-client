@@ -457,34 +457,6 @@ class OfferListItem extends React.Component {
 
 }
 
-
-// const OfferList = observer(({offers, onSelect}) => {
-
-//   const elements = offers.map((x) => {
-//     return new OfferListItem({offer:x, onSelect})
-//   })
-//   return (
-//     <List celled style={style}>
-//       <style>{inlineStyle}</style>
-//        {elements}
-//      </List>
-//   )
-// })
-
-
-
-// const Routes = () => {
-//   return (
-//     <div style={{height:"100%", width:"100%"}}>
-//       <Route path="/"  exact component={Home} />
-//     </div>
-//   )
-// }
-
-// <Route path="/login" exact component={Login} />
-// <Route path="/home"  exact component={Home} />
-// => https://codepen.io/surjikal/pen/PJgGPB
-
 const App = observer(() => {
   const offerStore   = new OfferStore()
   const profileStore = new ProfileStore()
